@@ -64,11 +64,11 @@ public class Suplier_ManagementController {
 			
 		}
 		model.addObject("supplier", supplier);
-		List<Supplier_Order> SupplierItems = supplierManagement_IServices.getSupplierOrderItem(supplier.getSupplier_ID());
+		List<Supplier_Order> SupplierItems = supplierManagement_IServices.getSupplierOrderItem1(supplier.getSupplier_ID());
 		
 		model.addObject("SupplierItems", SupplierItems);
 		
-		List<Supplier_Order> SupplierItems1 = supplierManagement_IServices.getSupplierOrderItem1(supplier.getSupplier_ID());
+		List<Supplier_Order> SupplierItems1 = supplierManagement_IServices.getSupplierOrderItem(supplier.getSupplier_ID());
 		model.addObject("SupplierItems1", SupplierItems1);
 
 		
@@ -143,7 +143,7 @@ public class Suplier_ManagementController {
 		return new ModelAndView("/SupplierManagement/deoAddSupplier");
 	}
 
-	/*
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView LoginSupplier_GET(@ModelAttribute("supplier") Supplier supplier) {
 
@@ -171,12 +171,12 @@ public class Suplier_ManagementController {
 			return new ModelAndView("redirect:/login");
 		}
 	}
-*/
+
 	@RequestMapping(value = "/AddSupplier_post", method = RequestMethod.POST)
 	public ModelAndView AddSupplierform(@ModelAttribute("supplier") Supplier supplier) {
 
 		
-		if(supplier.getSupplier_password()==supplier.getSupplier_password2())
+		if(supplier.getSupplier_password().equals(supplier.getSupplier_password2()))
 		{
 		
 			System.out.println("Adding supplier");
@@ -197,7 +197,8 @@ public class Suplier_ManagementController {
 	@RequestMapping(value = "/AdminAddSupplier_post", method = RequestMethod.POST)
 	public ModelAndView AdminAddSupplierform(@ModelAttribute("supplier") Supplier supplier) {
 
-		if(supplier.getSupplier_password()==supplier.getSupplier_password2())
+		System.out.println("Adding supplier "+supplier.getSupplier_password()+" Supplier"+supplier.getSupplier_password2());
+		if(supplier.getSupplier_password().equals(supplier.getSupplier_password2()))
 		{
 		
 			System.out.println("Adding supplier");

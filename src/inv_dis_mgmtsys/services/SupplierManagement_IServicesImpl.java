@@ -87,18 +87,18 @@ public class SupplierManagement_IServicesImpl implements SupplierManagement_ISer
 
 			
 			System.out.println("this is the one " + i.getSupplier_Order_id());
-			Supplier_Finance finance = supplierManagerIDO.getFinanceDetails1(i.getSupplier_Order_id());
-			System.out.println("printing the details of the finace" + finance.getPaymentState());
-			if (finance.getPaymentState().equals("paid")) {
+			List<Supplier_Finance> finance = supplierManagerIDO.getAllFinanceDetails(i.getSupplier_Order_id());
+			for (Supplier_Finance j : finance) {
+				System.out.println("printing the details of the finace" + j.getPaymentState());
+				if (j.getPaymentState().equals("complete")) {
 				
 				System.out.println("add to the list");
-				supplier_Finance.add(finance);
+				supplier_Finance.add(j);
+			}
 			}
 
 		}
-
 		
-
 		return supplier_Finance;
 
 	}
@@ -115,12 +115,14 @@ public class SupplierManagement_IServicesImpl implements SupplierManagement_ISer
 
 			
 			System.out.println("this is the one " + i.getSupplier_Order_id());
-			Supplier_Finance finance = supplierManagerIDO.getFinanceDetails1(i.getSupplier_Order_id());
-			System.out.println("printing the details of the finace" + finance.getPaymentState());
-			if (finance.getPaymentState().equals("not paid")) {
+			List<Supplier_Finance> finance = supplierManagerIDO.getAllFinanceDetails(i.getSupplier_Order_id());
+			for (Supplier_Finance j : finance) {
+				System.out.println("printing the details of the finace" + j.getPaymentState());
+				if (j.getPaymentState().equals("incomplete")) {
 				
 				System.out.println("add to the list");
-				supplier_Finance.add(finance);
+				supplier_Finance.add(j);
+			}
 			}
 
 		}
@@ -173,7 +175,7 @@ public class SupplierManagement_IServicesImpl implements SupplierManagement_ISer
 		double income = 0;
 		for (Supplier_Finance supplierFinances : supplier_Finances) {
 
-			if (supplierFinances.getPaymentState().equals("paid")) {
+			if (supplierFinances.getPaymentState().equals("complete")) {
 				income += supplierFinances.getAmount();
 			}
 		}
@@ -193,7 +195,7 @@ public class SupplierManagement_IServicesImpl implements SupplierManagement_ISer
 		double income = 0;
 		for (Supplier_Finance supplierFinances : supplier_Finances) {
 
-			if (supplierFinances.getPaymentState().equals("not paid")) {
+			if (supplierFinances.getPaymentState().equals("incomplete")) {
 				income += supplierFinances.getAmount();
 			}
 		}
@@ -233,7 +235,7 @@ public class SupplierManagement_IServicesImpl implements SupplierManagement_ISer
 		int amount = 0;
 		for (Supplier_Order supplierOder : Order) {
 
-			if (supplierOder.getOrder_Status().equals("Complet")) {
+			if (supplierOder.getOrder_Status().equals("complete")) {
 			
 			amount += supplierOder.getAmount() ;
 			}
@@ -258,7 +260,7 @@ public class SupplierManagement_IServicesImpl implements SupplierManagement_ISer
 			Item item = supplierManagerIDO.getSupplierOrderItem(i.getItem_code());
 			System.out.println("this is item"+item.getItem_name());
 			i.setItemname(item.getItem_name());
-			if (i.getOrder_Status().equals("Incomplet")) {
+			if (i.getOrder_Status().equals("complete")) {
 				
 				System.out.println("add to the list "+i.getAmount()+i.getSupplier_order_date());
 				supplier_item.add(i);
@@ -284,7 +286,7 @@ public class SupplierManagement_IServicesImpl implements SupplierManagement_ISer
 			Item item = supplierManagerIDO.getSupplierOrderItem(i.getItem_code());
 			System.out.println("this is item"+item.getItem_name());
 			i.setItemname(item.getItem_name());
-			if (i.getOrder_Status().equals("Complet")) {
+			if (i.getOrder_Status().equals("Incomplet")) {
 				
 				System.out.println("add to the list "+i.getAmount()+i.getSupplier_order_date());
 				supplier_item.add(i);

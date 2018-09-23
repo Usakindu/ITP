@@ -41,7 +41,7 @@ public class Retailer_ManagementController {
 	}
 
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView LoginRetailer_GET(@ModelAttribute("retailer") Retailer Retailer) {
 
 		System.out.println("Get your login");
@@ -65,7 +65,7 @@ public class Retailer_ManagementController {
 			return new ModelAndView("UserManagement/General_LoginPage");
 		}
 	}
-
+*/
 	@RequestMapping(value = "/Delete_Request_GET", method = RequestMethod.GET)
 	public ModelAndView deleteRetailers_GET(
 		@ModelAttribute("retailer_notification") Notification retailer_notification) {
